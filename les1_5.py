@@ -8,9 +8,11 @@
 profit = input("Укажите сколько выручки в этом месяце:\n>>>")
 costs = input("Укажите сколько издержек в этом месяце:\n>>>")
 number_employees = input("Укажите количество сотрудников в фирме:\n>>>")
+
 if profit.isdigit() and costs.isdigit() and number_employees.isdigit():
-    profit = int(profit)
-    costs = int(costs)
+    profit = float(profit)
+    costs = float(costs)
+
     if profit > costs:
         difference = profit - costs
         profitability = int(difference / profit * 100)
@@ -18,6 +20,9 @@ if profit.isdigit() and costs.isdigit() and number_employees.isdigit():
         print(f"В этом месяце фирма отработала с прибылью {difference}.")
         print(f"Рентабельность фирмы равна {profitability}%.")
         print(f"Прибыль фирмы в расчете на одного сотрудника составляет {profit_employee}.")
-
+    elif profit == costs:
+        print("В этом месяце фирма отработала с нулевой прибылью.")
+    else:
+        print("В этом месяце фирма отработала в убыток.")
 else:
     print("Ошибка: введенные данные не являются числами.")
