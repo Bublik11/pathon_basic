@@ -4,3 +4,17 @@
 # разделенных пробелом. Каждое слово состоит из латинских букв в нижнем регистре.
 # Сделать вывод исходной строки, но каждое слово должно начинаться с заглавной буквы.
 # Необходимо использовать написанную ранее функцию int_func().
+
+def string_lower(string: str) -> str:
+
+    def int_func(word: str) -> str:
+        return word.title()
+
+    result = ""
+    for w in string.split(' '):
+        result += int_func(w) + ' '
+    return result
+
+
+user_message = input("Введите строку:\n>>>")
+print(string_lower(user_message))

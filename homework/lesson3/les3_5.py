@@ -5,3 +5,34 @@
 # Но если вместо числа вводится специальный символ, выполнение программы завершается.
 # Если специальный символ введен после нескольких чисел, то вначале нужно добавить
 # сумму этих чисел к полученной ранее сумме и после этого завершить программу.
+
+def my_sum(string: str):
+    num_list = string.split(' ')
+    new_sum = 0
+    is_exit = False
+    for el in num_list:
+        try:
+            el = float(el)
+        except ValueError:
+            if el == "-exit":
+                is_exit = True
+                break
+            elif el != "":
+                print(f'Ошибка: "{el}" не удалось преобразовать в число')
+            continue
+        else:
+            new_sum += el
+    return [new_sum, is_exit]
+
+
+sum_number = 0
+while True:
+    message = input('Введите строку с числами, разделёнными пробелами '
+                    '(для выхода из программы напишите "-exit"):\n>>>')
+    check_list = my_sum(message)
+
+    sum_number += check_list[0]
+    print(f"Сумма чисел стала равна: {sum_number}\n")
+    if check_list[1]:
+        "Завершение программы"
+        break
