@@ -29,7 +29,7 @@ class SignError(Exception):
         self.txt = text
 
 
-class Ui:
+class Ui(ABC):
     @staticmethod
     def pos_number(funk, add_msg='',):
         while True:
@@ -117,17 +117,13 @@ class Ui:
             # преобразовываем индекс в название подразделения
             name_dep = [el for el in store.office][idx_dep]
 
-            tmp_list = None
+            tmp_list = store.equipments
             if give_take == '-g':
-                # показываем технику на складе
-                # показываем технику подразделения
                 if not store.equipments:
                     raise ValueError(f'Внимание: за подразделением "{store.name}" не числится оборудование')
                 print(store)
                 give_take = True
-                tmp_list = store.equipments
             else:
-                # показываем технику подразделения
                 if not store.office[name_dep]:
                     raise ValueError(f'Внимание: за подразделением "{name_dep}" не числится оборудование')
                 store.show_dep(name_dep)
@@ -300,10 +296,8 @@ class Storage:
                           False - вернуть технику на склада
         :return: None
         """
-        list1, list2 = [], []
-        if give_take:
-            list1, list2 = self.equipments, self.office[name_dep]
-        else:
+        list1, list2 = self.equipments, self.office[name_dep]
+        if not give_take:
             list2, list1 = self.equipments, self.office[name_dep]
 
         tmp = copy(list1[idx_eq])
